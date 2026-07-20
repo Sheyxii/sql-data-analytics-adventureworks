@@ -6,7 +6,7 @@ This project is inspired by **DataWithBaraa's SQL Data Analytics Project** and u
 
 ## Project Overview
 
-The project performs business analysis using dimensional tables in the Gold Layer, including customer, product, date, and sales data. It showcases common analytical techniques such as:
+The project performs business analysis using dimensional and fact tables in the Gold Layer, including customer, product, date, and sales data. It showcases common analytical techniques such as:
 
 * Sales Analysis
 * Customer Analysis
