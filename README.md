@@ -19,7 +19,7 @@ The project performs business analysis using dimensional tables in the Gold Laye
 This project uses the **Gold Layer** from my SQL Data Warehouse project, which follows a Star Schema with Fact and Dimension tables optimized for analytics.
 
 **Related Project:**
-🔗 https://github.com/Sheyxii/sql-data-warehouse-adventureworks
+🔗 [sql-data-warehouse-adventureworks](https://github.com/Sheyxii/sql-data-warehouse-adventureworks)
 
 ## Technologies
 
