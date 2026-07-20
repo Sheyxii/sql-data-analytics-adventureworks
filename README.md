@@ -41,14 +41,6 @@ sql-data-analytics-adventureworks/
 └── README.md
 ```
 
-## Learning Objectives
-
-* Practice analytical SQL queries
-* Solve business problems using data
-* Generate KPIs and business insights
-* Build a Data Analytics portfolio project
-* Apply SQL best practices
-
 ## Acknowledgements
 
 This project is based on the excellent **SQL Data Analytics Project** by **DataWithBaraa**. I adapted the concepts using the Gold Layer from my own AdventureWorks Data Warehouse to practice SQL analytics and build my portfolio.
