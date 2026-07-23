@@ -13,6 +13,7 @@ WARNING:
     All data in the database will be permanently deleted. Proceed with caution 
     and ensure you have proper backups before running this script.
 */
+
 USE master;
 GO
 -- Drop and recreate the 'AW_Analytics' database
