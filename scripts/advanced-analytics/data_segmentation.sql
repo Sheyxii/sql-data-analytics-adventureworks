@@ -13,27 +13,33 @@ SQL Functions Used:
 */
 
 
-/*Segment products into cost ranges and 
-count how many products fall into each segment*/
- 
-WITH product_segments AS (
+/*Segment products into three performance tiers based on their total sales revenue:
+	- Best Seller: Products with total revenue of at least 50,000.
+	- Moderate Seller: Products with total revenue between 10,000 and 49,999.
+	- Low Seller: Products with total revenue below 10,000.
+And find the total number of products by each segment
+*/
+WITH product_revenue AS (
 	SELECT 
-		product_key,
-		product_name,
-		standard_cost,
-		CASE WHEN standard_cost < 100 THEN 'Below 100'
-			 WHEN standard_cost BETWEEN 100  AND 500 THEN '100 - 500'
-			 WHEN standard_cost BETWEEN 500  AND 1000 THEN '500 - 1000'
-			 ELSE 'Above 1000'
-		END AS cost_range
-	FROM gold.dim_products
+		dp.product_key,
+		dp.product_name,
+		SUM(fs.sales_amount) AS total_revenue,
+		CASE WHEN SUM(fs.sales_amount) >= 50000 THEN 'Best Seller'
+			 WHEN SUM(fs.sales_amount) BETWEEN 10000  AND 49999 THEN 'Moderate Seller'
+			 ELSE 'Low Seller'
+		END AS performance_segment
+	FROM gold.fact_sales AS fs
+	LEFT JOIN gold.dim_products AS dp
+		ON fs.product_key = dp.product_key
+	GROUP BY dp.product_key, dp.product_name
 )
 SELECT 
-	cost_range,
-	COUNT(product_key) AS total_products
-FROM product_segments
-GROUP BY cost_range
-ORDER BY total_products DESC
+	performance_segment,
+	COUNT(product_key) AS total_product
+FROM product_revenue
+GROUP BY performance_segment
+ORDER BY total_product DESC;
+
 
 /*Group individual customers into three segments based on their spending behavior:
 	- VIP: Customers with at least 12 months of history and spending more than €5,000.
@@ -70,4 +76,4 @@ FROM (
 	FROM customer_spending
 ) AS segmented_customers
 GROUP BY customer_segments
-ORDER BY total_customer DESC
+ORDER BY total_customer DESC;
