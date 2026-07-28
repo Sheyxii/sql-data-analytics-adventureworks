@@ -91,14 +91,44 @@ GROUP BY
     name,
     customer_type
 )
-SELECT *
-FROM customer_aggregation;
 /*---------------------------------------------------------------------------
 3) Final Output: Apply segmentation and compute KPIs
-   - customer_type ('Store' / 'Individual') carried through for filtering
-     and breakdown in reporting tools
    - customer_segment (VIP / Regular / New) based on lifespan and total_sales
    - recency = months since last order date
-   - avg_order_value = total_sales / total_orders
+   - purchase_frequency = total_order / lifespan
+   - avg_order_value = total_sales / total_order
+   - avg_quantity_per_order = total_quantity / total_order
    - avg_monthly_spend = total_sales / lifespan
+   - avg_monthly_profit = total_profit / lifespan
+   - profit_margin_pct = (total_profit / total_sales) * 1000
 ---------------------------------------------------------------------------*/
+SELECT 
+    customer_key,
+    customer_id,
+    name,
+    customer_type,
+    CASE WHEN lifespan >= 12 AND total_sales > 5000 THEN 'VIP'
+         WHEN lifespan >= 12 AND total_sales < 5000 THEN 'Regular' 
+         ELSE 'New'
+    END AS customer_segment,
+    last_order_date,
+    total_order,
+    total_sales,
+    total_quantity,
+    total_product,
+    total_discount_given,
+    total_profit,
+    lifespan,
+    ROUND(CAST(total_order AS FLOAT) / NULLIF(lifespan, 0), 2) AS purchase_frequency,
+    CASE WHEN total_sales = 0 THEN 0
+	     ELSE total_sales / total_order
+    END AS avg_order_value,
+    ROUND(CAST(total_quantity AS FLOAT) / total_order , 2) AS avg_quantity_per_order,
+    CASE WHEN lifespan = 0 THEN total_sales
+         ELSE ROUND(CAST(total_sales AS FLOAT) / lifespan , 2) 
+    END AS avg_monthly_spend,
+    CASE WHEN lifespan = 0 THEN total_profit
+         ELSE ROUND(CAST(total_profit AS FLOAT) / lifespan , 2) 
+    END AS avg_monthly_profit,
+    (total_profit / total_sales) * 100 AS profit_margin_pct
+FROM customer_aggregation;
