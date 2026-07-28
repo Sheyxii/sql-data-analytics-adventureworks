@@ -18,6 +18,7 @@ Highlights:
            - total profit (sum of gross profit across all orders)
            - total discount given (sum of unit price discount x quantity)
     4. Calculates valuable KPIs:
+           - Customer Segment
            - Recency
            - Purchase Frequency
            - Average Order Value
@@ -25,8 +26,6 @@ Highlights:
            - Average Monthly Spend
            - Average Monthly Profit
            - Profit Margin %
-           - Discount Rate %
-           - Customer Segment
 ===============================================================================
 */
 
