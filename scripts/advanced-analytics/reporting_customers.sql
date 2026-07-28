@@ -99,7 +99,7 @@ GROUP BY
    - avg_quantity_per_order = total_quantity / total_order
    - avg_monthly_spend = total_sales / lifespan
    - avg_monthly_profit = total_profit / lifespan
-   - profit_margin_pct = (total_profit / total_sales) * 1000
+   - profit_margin_pct = (total_profit / total_sales) * 100
 ---------------------------------------------------------------------------*/
 SELECT 
     customer_key,
