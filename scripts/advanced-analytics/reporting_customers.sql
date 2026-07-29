@@ -32,11 +32,7 @@ Highlights:
 -- =============================================================================
 -- Create Report: gold.report_customers
 -- =============================================================================
-IF OBJECT_ID('gold.report_customers', 'V') IS NOT NULL
-    DROP VIEW gold.report_customers;
-GO
 
-CREATE VIEW gold.report_customers AS 
 
 /*---------------------------------------------------------------------------
 1) Base Query: Retrieve core columns from fact_sales and dim_customers
