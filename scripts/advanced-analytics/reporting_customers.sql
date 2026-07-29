@@ -32,7 +32,11 @@ Highlights:
 -- =============================================================================
 -- Create Report: gold.report_customers
 -- =============================================================================
+IF OBJECT_ID('gold.report_customers', 'V') IS NOT NULL
+    DROP VIEW gold.report_customers;
+GO
 
+CREATE VIEW gold.report_customers AS 
 
 /*---------------------------------------------------------------------------
 1) Base Query: Retrieve core columns from fact_sales and dim_customers
@@ -80,6 +84,7 @@ SELECT
     SUM(order_quantity) AS total_quantity,
     COUNT(DISTINCT product_key) AS total_products,
     SUM(gross_profit) AS  total_profit,
+	SUM(unit_price_discount * order_quantity) AS total_discount_given,
     MAX(order_date) AS last_order_date,
     DATEDIFF(MONTH, MIN(order_date), MAX(order_date)) AS lifespan
 FROM base_query
