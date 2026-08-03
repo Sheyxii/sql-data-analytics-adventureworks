@@ -35,7 +35,9 @@ sql-data-analytics-adventureworks/
 │
 ├── dataset/
 ├── scripts/
-│   ├── data_analysis/
+│   ├── advanced-analytics/
+│   ├── exploratory-data-analysis/
+│   └── init_database.sql
 │
 ├── LICENCSE
 └── README.md
